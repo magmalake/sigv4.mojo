@@ -1,0 +1,54 @@
+[workspace]
+authors = ["Marius S <39998+winding-lines@users.noreply.github.com>"]
+channels = ["https://conda.modular.com/max-nightly", "conda-forge"]
+name = "sigv4.mojo"
+version = "0.1.0"
+description = "AWS Signature Version 4 for Mojo: header and presigned flavours, with pure-Mojo SHA-256 and HMAC."
+preview = ["pixi-build"]
+platforms = ["osx-arm64", "linux-64"]
+
+# No FFI shim and no C library: the only foreign call is libc's `time`. The
+# OpenSSL libcrypto below is a test-only oracle for SHA-256 (the tests skip
+# that comparison when it is absent) and nothing in `sigv4` links it.
+[dependencies]
+openssl = ">=3,<4"
+
+[tasks]
+test = { cmd = "mkdir -p build && mojo run -I src -I tests tests/sigv4_test.mojo" }
+check = { depends-on = ["test"] }
+fmt = { cmd = "mojo format src tests" }
+format-check = { cmd = "mojo format src tests && git diff --exit-code -- src tests" }
+gen-vectors = { cmd = "python3 tools/gen_sigv4_vectors.py" }
+
+# ── pixi-build: consumable as a pixi source dependency ──────────────────────
+# Conda package name is sigv4-mojo; the Mojo import stays `from sigv4 import …`.
+[package]
+name = "sigv4-mojo"
+version = "0.1.0"
+
+[package.build]
+backend = { name = "pixi-build-mojo", version = "0.*" }
+
+[package.build.config.pkg]
+path = "src/sigv4"
+name = "sigv4"
+
+[package.host-dependencies]
+mojo-compiler = "==1.2.0"
+
+[package.build-dependencies]
+mojo-compiler = "==1.2.0"
+
+[package.run-dependencies]
+mojo-compiler = ">=1.2.0,<2"
+
+# ── stable / nightly toolchain matrix (see CI) ──────────────────────────────
+[feature.nightly.dependencies]
+modular = ">=26.8.0.dev2026102305,<28"
+
+[feature.stable.dependencies]
+mojo-compiler = "==1.2.0"
+
+[environments]
+default = ["nightly"]
+stable = ["stable"]

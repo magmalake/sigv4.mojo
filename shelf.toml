@@ -1,0 +1,5 @@
+name = "sigv4-mojo"
+version = "0.1.0"
+description = "AWS Signature Version 4 for Mojo — header and presigned flavours, verified against the published aws-sig-v4-test-suite, with pure-Mojo SHA-256 (ARMv8 / SHA-NI accelerated) and HMAC"
+tags = ["aws", "sigv4", "sha256", "hmac", "crypto", "signing", "magmalake"]
+tins = []
