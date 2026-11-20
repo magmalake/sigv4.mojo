@@ -58,7 +58,7 @@ def _ascii_lower(s: String) -> String:
         if c >= 65 and c <= 90:
             c += 32
         out.append(c)
-    return String(StringSlice(unsafe_from_utf8=Span(out)))
+    return String(StringSpan(unsafe_from_utf8=Span(out)))
 
 
 def _trim(s: String) -> String:
@@ -73,7 +73,7 @@ def _trim(s: String) -> String:
         j -= 1
     if i >= j:
         return String("")
-    return String(StringSlice(unsafe_from_utf8=Span(b)[i:j]))
+    return String(StringSpan(unsafe_from_utf8=Span(b)[i:j]))
 
 
 comptime _HEXUP = String("0123456789ABCDEF")
@@ -99,7 +99,7 @@ def url_encode(s: String, encode_slash: Bool = True) -> String:
             or c == 126
         )
         if unreserved or (c == 47 and not encode_slash):
-            out += String(StringSlice(unsafe_from_utf8=Span(b)[k : k + 1]))
+            out += String(StringSpan(unsafe_from_utf8=Span(b)[k : k + 1]))
         else:
             out += "%"
             out += String(_HEXUP[byte=Int(c >> 4)])
@@ -177,7 +177,7 @@ struct AmzTime(Copyable, Movable):
         if amz_date.byte_length() < 8:
             raise Error("sigv4: malformed X-Amz-Date " + amz_date)
         var b = amz_date.as_bytes()
-        var stamp = String(StringSlice(unsafe_from_utf8=Span(b)[0:8]))
+        var stamp = String(StringSpan(unsafe_from_utf8=Span(b)[0:8]))
         return Self(amz_date, stamp^)
 
 
@@ -277,7 +277,7 @@ def _collapse_spaces(value: String) -> String:
             continue
         prev_space = False
         out.append(c)
-    return String(StringSlice(unsafe_from_utf8=Span(out)))
+    return String(StringSpan(unsafe_from_utf8=Span(out)))
 
 
 def canonical_headers(
