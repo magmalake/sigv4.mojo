@@ -13,7 +13,7 @@ on:
 
 jobs:
   # A release PR (only versions, CHANGELOG.md, revs and locks change; see
-  # tools/release_only.py in magmalake/.github) skips the macOS, nightly and
+  # tools/release_only.py in magmalake/.github) skips the macOS and
   # extra jobs below and runs a consumer build of the PR head instead. Every
   # other PR runs everything. The verdict is its own fast job because the jobs
   # below wait for it; the builds are the next one.
@@ -37,28 +37,27 @@ jobs:
       # The test legs below are skipped on release PRs, and the consumer build
       # is the check (the lock file needs pixi 0.79 with --no-locked, which the shared job does not pass).
       task: ""
+      mojo-compiler: "==1.3.0.dev2026111805"
 
   test:
     needs: release
     if: ${{ !cancelled() && needs.release.outputs.release_only != 'true' }}
-    name: ${{ matrix.env == 'default' && 'nightly' || matrix.env }} / ${{ matrix.os }}
+    name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: ${{ fromJSON((github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && '["ubuntu-latest", "macos-latest"]' || '["ubuntu-latest"]') }}
-        env: [default, stable]
     steps:
       - uses: actions/checkout@v4
 
       - uses: prefix-dev/setup-pixi@v0.10.2
         with:
           pixi-version: v0.79.0
-          environments: ${{ matrix.env }}
           locked: false
 
       - name: Unit tests
-        run: pixi run -e ${{ matrix.env }} check
+        run: pixi run check
 
   # Imports: no cycles between modules, and each name imported from the
   # module that defines it (github.com/magmalake/customs).

@@ -1,4 +1,4 @@
-"""sigv4 — AWS Signature Version 4 for Mojo.
+"""`sigv4` — AWS Signature Version 4 for Mojo.
 
 `sigv4.crypto` is SHA-256, HMAC-SHA256 and hex in pure Mojo (ARMv8 SHA-2 and
 x86 SHA-NI backends chosen at compile time, scalar otherwise). `sigv4.signer`
