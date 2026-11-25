@@ -2,7 +2,7 @@
 authors = ["Marius S <39998+winding-lines@users.noreply.github.com>"]
 channels = ["https://conda.modular.com/max-nightly", "conda-forge"]
 name = "sigv4.mojo"
-version = "0.1.0"
+version = "0.1.1"
 description = "AWS Signature Version 4 for Mojo: header and presigned flavours, with pure-Mojo SHA-256 and HMAC."
 preview = ["pixi-build"]
 platforms = ["osx-arm64", "linux-64"]
@@ -30,7 +30,7 @@ gen-vectors = { cmd = "python3 tools/gen_sigv4_vectors.py" }
 # Conda package name is sigv4-mojo; the Mojo import stays `from sigv4 import …`.
 [package]
 name = "sigv4-mojo"
-version = "0.1.0"
+version = "0.1.1"
 
 [package.build]
 backend = { name = "pixi-build-mojo", version = "0.*" }
