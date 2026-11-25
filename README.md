@@ -66,7 +66,7 @@ Signing is all that is here: credentials, HTTP and retries are the caller's.
 ## Develop
 
 ```bash
-pixi run test               # Mojo 1.3.0.dev2026111805
+pixi run test               # Mojo 1.3.0.dev2026112505
 ```
 
 Consume it the magmalake way, by source path: check it out next to your

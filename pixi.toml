@@ -16,7 +16,7 @@ platforms = ["osx-arm64", "linux-64"]
 # it moves across all magmalake tins together. `mojo` (not just
 # mojo-compiler) because the fmt tasks need `mojo format`.
 [dependencies]
-mojo = "==1.3.0.dev2026111805"
+mojo = "==1.3.0.dev2026112505"
 openssl = ">=3,<4"
 
 [tasks]
@@ -40,10 +40,10 @@ path = "src/sigv4"
 name = "sigv4"
 
 [package.host-dependencies]
-mojo-compiler = "==1.3.0.dev2026111805"
+mojo-compiler = "==1.3.0.dev2026112505"
 
 [package.build-dependencies]
-mojo-compiler = "==1.3.0.dev2026111805"
+mojo-compiler = "==1.3.0.dev2026112505"
 
 [package.run-dependencies]
-mojo-compiler = "==1.3.0.dev2026111805"
+mojo-compiler = "==1.3.0.dev2026112505"
