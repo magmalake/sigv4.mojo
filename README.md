@@ -1,6 +1,6 @@
 # sigv4.mojo
 
-[![CI](https://github.com/magmalake/sigv4.mojo/actions/workflows/ci.yml/badge.svg)](https://github.com/magmalake/sigv4.mojo/actions/workflows/ci.yml)
+[![CI](https://github.com/magmalake/sigv4.mojo/actions/workflows/ci.yml/badge.svg)](https://github.com/magmalake/sigv4.mojo/actions/workflows/ci.yml) [![Used by](https://mojourney.dev/badge/magmalake/sigv4.mojo/used-by.svg)](https://mojourney.dev/repos/magmalake/sigv4.mojo#used-by) [![Mojo version](https://mojourney.dev/badge/magmalake/sigv4.mojo/mojo.svg)](https://mojourney.dev/repos/magmalake/sigv4.mojo)
 
 Part of [**magmalake**](https://magmalake.org) — data lake building blocks in Mojo.
 
